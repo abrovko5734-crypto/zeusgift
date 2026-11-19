@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<title>Небесная Лудка ☁️</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="sky" aria-hidden="true">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="cloud c4"></div>
+</div>
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <img src="mascot.png" alt="маскот" class="logo"/>
+      <div>
+        <h1>Небесная Лудка</h1>
+        <span class="sub">социальная игра · виртуальные монеты</span>
+      </div>
+    </div>
+    <div class="balance-chip" id="balance">💰 0</div>
+  </header>
+
+  <div class="bonus-bar">
+    <button id="btn-bonus" class="btn-gold">🎁 Ежедневный бонус</button>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="crash">🚀 Краш</button>
+    <button class="tab" data-tab="mines">💎 Мины</button>
+    <button class="tab" data-tab="cases">📦 Кейсы</button>
+    <button class="tab" data-tab="upgrade">⚡ Апгрейдер</button>
+    <button class="tab" data-tab="inv">🎒 Инвентарь</button>
+    <button class="tab" data-tab="top">🏆 Топ</button>
+  </nav>
+
+  <main>
+    <!-- КРАШ -->
+    <section id="tab-crash" class="panel active">
+      <div class="card">
+        <div class="crash-stage">
+          <canvas id="crash-canvas" width="640" height="360"></canvas>
+          <div class="crash-mult" id="crash-mult">x1.00</div>
+        </div>
+        <div class="row">
+          <label>Ставка
+            <input type="number" id="crash-bet" value="50" min="1" max="100000"/>
+          </label>
+          <button id="btn-crash-start" class="btn gold">Старт</button>
+          <button id="btn-crash-cash" class="btn green" disabled>Забрать</button>
+        </div>
+        <p class="hint" id="crash-hint">Успей забрать до краша!</p>
+        <p class="stat">Лучший кэф: <b id="crash-best">—</b></p>
+      </div>
+    </section>
+
+    <!-- МИНЫ -->
+    <section id="tab-mines" class="panel">
+      <div class="card">
+        <div class="row">
+          <label>Ставка
+            <input type="number" id="mines-bet" value="50" min="1"/>
+          </label>
+          <label>Мины
+            <select id="mines-count">
+              <option value="3">3</option>
+              <option value="5" selected>5</option>
+              <option value="10">10</option>
+            </select>
+          </label>
+          <button id="btn-mines-start" class="btn gold">Старт</button>
+          <button id="btn-mines-cash" class="btn green" disabled>Забрать</button>
+        </div>
+        <div class="grid5" id="mines-grid"></div>
+        <p class="hint" id="mines-hint">Кэф: x1.00 · Открывай безопасные клетки</p>
+      </div>
+    </section>
+
+    <!-- КЕЙСЫ -->
+    <section id="tab-cases" class="panel">
+      <div class="cases" id="cases-list"></div>
+      <p class="stat" style="margin-top:10px;">Подарки из кейсов попадают в инвентарь и их можно продать или апгрейдить.</p>
+    </section>
+
+    <!-- АПГРЕЙДЕР -->
+    <section id="tab-upgrade" class="panel">
+      <div class="card">
+        <p class="card-title">⚡ Апгрейдер</p>
+        <p class="stat">Обменяй свой подарок на более дорогой. Шанс зависит от соотношения стоимости.</p>
+        <div class="up-line">
+          <label>Твой подарок
+            <select id="up-mine"></select>
+          </label>
+          <label>Хочу получить
+            <select id="up-target"></select>
+          </label>
+        </div>
+        <div class="up-chance" id="up-chance">Шанс: —</div>
+        <button id="btn-upgrade" class="btn gold">Апгрейднуть</button>
+      </div>
+    </section>
+
+    <!-- ИНВЕНТАРЬ -->
+    <section id="tab-inv" class="panel">
+      <div class="card">
+        <p class="card-title">🎒 Инвентарь</p>
+        <div class="inv-grid" id="inv-grid"></div>
+        <p class="stat" id="inv-total"></p>
+      </div>
+    </section>
+
+    <!-- ТОП -->
+    <section id="tab-top" class="panel">
+      <div class="card">
+        <p class="card-title">🏆 Небесный топ</p>
+        <ol class="top-list" id="top-list"></ol>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Игра ведётся в виртуальных монетах без реальной стоимости. Реальные платежи не принимаются, выигрыши не выводятся. 18+ · играй ответственно.</p>
+    <p><a href="terms.html">Пользовательское соглашение</a> · <a href="privacy.html">Политика конфиденциальности</a></p>
+  </footer>
+</div>
+
+<!-- МОДАЛКА -->
+<div id="modal" class="modal hidden">
+  <div class="modal-card">
+    <div class="modal-title" id="modal-title"></div>
+    <div id="modal-body"></div>
+    <button class="btn close" id="modal-close">Ок</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
